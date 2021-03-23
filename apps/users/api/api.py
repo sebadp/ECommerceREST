@@ -29,7 +29,7 @@ def user_api_view(request, ):
 
         # hacemos un diccionario para pasarlo como data para hacer un usuario de prueba
         test_data={
-            'name': "develop",
+            'name': "seba",
             'email': 'developer@gmail.com',
         }
         # serializamos la info con la clase que creamos en serializers
