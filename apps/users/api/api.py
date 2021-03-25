@@ -38,6 +38,7 @@ def user_api_view(request, ):
         # si pasa la validación imprimimos un mensaje.>> Se guarda la data en validated_data
         # pero si no lo pasa, crea un diccionario llamado "errors" que luego lo podemos imprimir.
         if test_user.is_valid():
+            user_instance = test_user.save()
             print("Pasó las validaciones")
         else :
             print(test_user.errors)
