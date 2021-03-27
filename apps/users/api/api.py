@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from apps.users.models import User
-from apps.users.api.serializers import UserSerializer, TestUserSerializer
+from apps.users.api.serializers import UserSerializer
 
 # class UserAPIView(APIView):
 
@@ -27,21 +27,21 @@ def user_api_view(request, ):
         users = User.objects.all()
         users_serializer = UserSerializer(users, many=True)
 
-        # hacemos un diccionario para pasarlo como data para hacer un usuario de prueba
-        test_data={
-            'name': "seba",
-            'email': 'developer@gmail.com',
-        }
-        # serializamos la info con la clase que creamos en serializers
-        test_user = TestUserSerializer(data=test_data)
+        # # hacemos un diccionario para pasarlo como data para hacer un usuario de prueba
+        # test_data={
+        #     'name': "seba",
+        #     'email': 'developer@gmail.com',
+        # }
+        # # serializamos la info con la clase que creamos en serializers
+        # test_user = UserSerializer(data=test_data)
 
-        # si pasa la validación imprimimos un mensaje.>> Se guarda la data en validated_data
-        # pero si no lo pasa, crea un diccionario llamado "errors" que luego lo podemos imprimir.
-        if test_user.is_valid():
-            user_instance = test_user.save()
-            print("Pasó las validaciones")
-        else :
-            print(test_user.errors)
+        # # si pasa la validación imprimimos un mensaje.>> Se guarda la data en validated_data
+        # # pero si no lo pasa, crea un diccionario llamado "errors" que luego lo podemos imprimir.
+        # if test_user.is_valid():
+        #     user_instance = test_user.save()
+        #     print("Pasó las validaciones")
+        # else :
+        #     print(test_user.errors)
         return Response(users_serializer.data, status=status.HTTP_200_OK)
 
     # Create
@@ -86,7 +86,7 @@ def user_detail_api_view(request, pk=None):
             en la siguiente línea: le pasamos el usuario en la db y la data que ingresa el usuario
             para que lo compare y actualize lo diferente
             """
-
+            # EXPLICITO:    user_serializer = TestUserSerializer(instance = user, data=request.data) Es lo mismo que abajo: 
             user_serializer = UserSerializer(user, data=request.data)
             if user_serializer.is_valid():
                 user_serializer.save()
